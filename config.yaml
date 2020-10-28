@@ -4,7 +4,7 @@ languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
 title: Machine and me
-disqusShortname: hugo-theme-stack
+disqusShortname: machineand
 DefaultContentLanguage: en
 permalinks:
   post: '/p/:slug/'
@@ -26,14 +26,14 @@ params:
   article:
     math: true
     license:
-      enabled: false
-      default: Machine and me
+      enabled: true
+      default: Machine and me, Kiselev Nikolay
   comments:
-    enabled: false
+    enabled: true
     provider: disqus
     utterances:
       repo: ''
-      issueTerm: pathname
+      issueTerm: machineand
       label: ''
       theme: preferred-color-scheme
   widgets:
