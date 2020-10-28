@@ -1,0 +1,90 @@
+---
+baseurl: 'https://example.com'
+languageCode: en-us
+theme: hugo-theme-stack
+paginate: 5
+title: Machine and me
+disqusShortname: hugo-theme-stack
+DefaultContentLanguage: en
+permalinks:
+  post: '/p/:slug/'
+  page: '/:slug/'
+params:
+  mainSections:
+    - post
+  featuredImageField: image
+  rssFullContent: true
+  dateFormat:
+    published: 'Jan 02, 2006'
+    lastUpdated: 'Jan 02, 2006 15:04 MST'
+  sidebar:
+    emoji:
+      title: Working remotely
+      link: https://noto-website-2.storage.googleapis.com/emoji/emoji_u1f468_200d_1f4bb.png
+    avatar: img/author.png
+    subtitle: 'Kiselev Nikolay & CO.'
+  article:
+    math: true
+    license:
+      enabled: false
+      default: Machine and me
+  comments:
+    enabled: false
+    provider: disqus
+    utterances:
+      repo: ''
+      issueTerm: pathname
+      label: ''
+      theme: preferred-color-scheme
+  widgets:
+    enabled:
+      - archives
+      - tag-cloud
+    archives:
+      limit: 5
+      path: archives
+    tagCloud:
+      limit: 10
+  opengraph:
+    twitter:
+      site: ''
+      card: summary_large_image
+  defaultImage:
+    opengraph:
+      enabled: false
+      local: false
+      src: ''
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: /
+      weight: -100
+      pre: home
+    - identifier: projects
+      name: Projects
+      url: /categories/projects/
+      weight: -90
+      pre: projects
+    - identifier: jobs
+      name: Jobs feed
+      url: /categories/jobs/
+      weight: -80
+      pre: briefcase
+    - identifier: archives
+      name: Archives
+      url: archives
+      weight: -70
+      pre: archives
+related:
+  includeNewer: true
+  threshold: 60
+  toLower: false
+  indices:
+    - name: tags
+      weight: 100
+    - name: categories
+      weight: 200
+markup:
+  highlight:
+    noClasses: false
