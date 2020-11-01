@@ -1,0 +1,36 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  install:
+    cmds:
+      - task: binFolder
+      - wget https://github.com/gohugoio/hugo/releases/download/v0.77.0/hugo_0.77.0_Linux-64bit.tar.gz
+      - tar -xzf hugo_0.77.0_Linux-64bit.tar.gz -C ./bin 
+      - rm hugo_0.77.0_Linux-64bit.tar.gz
+    status:
+      - test -f ./bin/hugo
+  build:
+    cmds:
+      - task: install
+      - hugo
+    sources:
+      - assets/**/*
+      - archetypes/**/*
+      - assets/**/*
+      - content/**/*
+      - data/**/*
+      - layouts/**/*
+      - resources/**/*
+      - static/**/*
+      - themes/**/*
+    generates:
+      - public/*
+  binFolder:
+    cmds:
+      - mkdir ./bin/
+      - echo "*" > ./bin/.gitignore
+    status:
+      - test -d ./bin
+      - test -f ./bin/.gitignore

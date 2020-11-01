@@ -1,0 +1,80 @@
+---
+- name: Install caddy
+  hosts: www
+  roles:
+    - { role: datadog.datadog, become: yes }
+  vars:
+    datadog_api_key: "5faebf15670514349970e9d499bf3ca8"
+    datadog_site: "datadoghq.com"
+    datadog_config:
+      tags:
+        - "region:Frankfurt1"
+        - "availability-zone:digital-ocean"
+        - "instance-type:www"
+      logs_enabled: true
+      process_config:
+        enabled: "true"
+    datadog_checks:
+      systemd:
+        init_config:
+        instances:
+          - unit_names:
+              - caddy
+      journald:
+        logs:
+          - type: journald
+            include_units:
+              - caddy.service
+      caddy:
+        logs:
+          - type: file
+            path: /var/log/caddy.access.log
+            service: caddy
+            source: caddy
+  tasks:
+    - name: Create static directory in /opt
+      file:
+        path: /opt/www/data
+        state: directory
+        mode: '0777'
+    - name: Uploading static
+      synchronize:
+        src: ./public/
+        dest: /opt/www/data/
+    - name: Installing Fedora Copr
+      dnf:
+        name: dnf-command(copr)
+        state: present
+    - name: Enable Fedora Copr for caddy
+      command:
+        cmd: dnf copr enable -y @caddy/caddy
+    - name: Installing Caddy
+      dnf:
+        name: caddy
+        state: present
+    - name: Enable Caddy in systemd
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: started
+        name: caddy
+    - name: Ensure group for Caddy exists
+      group:
+        name: caddy
+        state: present
+    - name: Adding user for Caddy
+      user:
+        name: caddy
+        group: caddy
+        comment: Caddy web server
+        system: yes
+        home: /var/lib/caddy
+        shell: /usr/sbin/nologin
+    - name: Uploading Caddfile
+      copy:
+        src: ./Caddyfile
+        dest: /etc/caddy/Caddyfile
+    - name: Restarting Caddyservice
+      systemd:
+        state: restarted
+        name: caddy
