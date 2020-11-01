@@ -6,7 +6,7 @@ tasks:
   install:
     cmds:
       - task: binFolder
-      - wget https://github.com/gohugoio/hugo/releases/download/v0.77.0/hugo_0.77.0_Linux-64bit.tar.gz
+      - wget -q https://github.com/gohugoio/hugo/releases/download/v0.77.0/hugo_0.77.0_Linux-64bit.tar.gz
       - tar -xzf hugo_0.77.0_Linux-64bit.tar.gz -C ./bin 
       - rm hugo_0.77.0_Linux-64bit.tar.gz
     status:
@@ -14,7 +14,7 @@ tasks:
   build:
     cmds:
       - task: install
-      - hugo
+      - ./bin/hugo
     sources:
       - assets/**/*
       - archetypes/**/*

@@ -1,7 +1,10 @@
 name: Release
 on:
-  release:
-    types: [released]
+  workflow_dispatch:
+    inputs:
+      message:
+        description: Message
+        default: Rebuild with new commits.
 jobs:
   deploy:
     runs-on: ubuntu-latest
