@@ -34,5 +34,5 @@ jobs:
         run: ansible-galaxy install datadog.datadog
 
       - name: Ansible some playbook
-        run: ansible-playbook ../playbook-traefik.yaml
+        run: ansible-playbook ../playbook.yaml
         working-directory: ansible
