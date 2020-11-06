@@ -1,0 +1,26 @@
+{{ define "main" }}
+    <div class="not-found-card">
+        <h1 class="article-title">You was redirected from strange domain</h1>
+        <h2 class="article-subtitle">
+        	<pre style="" class=qSpanFrom>???</pre>
+        	It looks like the site with the address <span class=qSpanFrom>???</span> has moved to another server. But the site DNS records refers to our server for some reason. Write to the site owner.
+        </h2>
+        <br>
+        <a target=_blank id=qSpanLink href="#">Try connect to <span class=qSpanFrom>???</span> again</a>
+        <br>
+        <a target=_blank id=qSpanLinkViewDNS href="#">View DNS records of <span class=qSpanFrom>???</span></a>
+        <br>
+        <a href="/">Visit our site</a>
+    </div>
+    <script>
+    	const queryParams = new URLSearchParams(location.search);
+		var qSpanFroms = document.getElementsByClassName('qSpanFrom');
+		var i;
+		for (i = 0; i < qSpanFroms.length; i++) {
+			qSpanFroms[i].innerText = queryParams.get('from');
+		}
+		document.getElementById("qSpanLink").href = "http://" + queryParams.get('from')
+		document.getElementById("qSpanLinkViewDNS").href = "https://viewdns.info/dnsrecord/?domain=" + queryParams.get('from')
+	</script>
+    {{ partialCached "footer/footer" . }}
+{{ end }}

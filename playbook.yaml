@@ -32,6 +32,12 @@
             service: caddy
             source: caddy
   tasks:
+
+    - name: Create log file for caddy
+      file:
+        path: /var/log/caddy.access.log
+        state: touch
+        mode: '0777'
     - name: Create static directory in /opt
       file:
         path: /opt/www/data
