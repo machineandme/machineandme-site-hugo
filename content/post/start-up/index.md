@@ -26,7 +26,7 @@ We made smart custom neon signs. Like on this image.
 
 ![](elw.png)
 
-We even printed shirts with code. The project is still reachable but we stopped producing the [codetees](http://codetee.machineand.me/).
+We even printed shirts with code. The project is still reachable but we stopped producing the [codetees](https://codetee.machineand.me/).
 
 ### Food recomendation software
 
