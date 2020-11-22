@@ -1,9 +1,4 @@
 :80 {
-    redir {
-        if {http.request.scheme} == 'http' {
-            https://{http.request.host}
-        }
-    }
     redir https://machineand.me/astray/?from={http.request.host}
 }
 machineand.me:80 {
