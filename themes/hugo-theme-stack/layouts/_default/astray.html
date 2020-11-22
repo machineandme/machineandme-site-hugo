@@ -19,7 +19,7 @@
 		for (i = 0; i < qSpanFroms.length; i++) {
 			qSpanFroms[i].innerText = queryParams.get('from');
 		}
-		document.getElementById("qSpanLink").href = "http://" + queryParams.get('from')
+		document.getElementById("qSpanLink").href = "https://" + queryParams.get('from')
 		document.getElementById("qSpanLinkViewDNS").href = "https://viewdns.info/dnsrecord/?domain=" + queryParams.get('from')
 	</script>
     {{ partialCached "footer/footer" . }}
