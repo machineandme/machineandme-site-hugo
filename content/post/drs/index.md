@@ -11,7 +11,7 @@ image = "/DRS.png"
 
 ### Drunken Snake?
 
-Not so long ago, I completely switched from python to go. Despite the fact that I have reached to the senior.
+Not so long ago, I switched from python to go. Despite the fact that I have reached to the senior.
 
 I'm sure python has a great future as a language for college education and data science. Or for quick scripts and prototypes.
 
