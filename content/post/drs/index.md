@@ -1,8 +1,7 @@
 +++
 author = "Kiselev Nikolay"
 title = "Drunken Snake"
-date = "2020-11-23T19:32:54Z"
-lastmod = "2020-11-23T19:32:54Z"
+date = "2020-11-22T19:32:54Z"
 description = "We made a telegram channel. We publish unusual python libraries."
 tags = ["Offtop"]
 categories = []
