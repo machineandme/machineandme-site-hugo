@@ -9,6 +9,8 @@ series = []
 image = "/DRS.png"
 +++
 
+[Subscribe "Drunken Snake" telegram channel!](https://t.me/drunkensnake)
+
 ### Drunken Snake?
 
 Not so long ago, I switched from python to go. Despite the fact that I have reached to the senior.
@@ -16,7 +18,5 @@ Not so long ago, I switched from python to go. Despite the fact that I have reac
 I'm sure python has a great future as a language for college education and data science. Or for quick scripts and prototypes.
 
 But I know how a python can surprise you. I made a channel with the most daring solutions in python.
-
-![](DRS.png)
 
 [Subscribe "Drunken Snake" telegram channel!](https://t.me/drunkensnake)
