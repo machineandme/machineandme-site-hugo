@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nes.css/2.1.1/css/nes.min.css">
+    <link rel="shortcut icon" href="../timert/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <title>Clipston</title>
+    <style>
+    textarea {
+        font-family: 'VT323';
+    }
+    * {cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),auto;}
+    .nes-btn {cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0,pointer}
+    </style>
+</head>
+<body style="margin: 1rem;">
+    <main id="app" style="width: 980px;" class="nes-container with-title">
+        <p class="title">Clipston</p>
+        <label for="textarea_field">Your message</label>
+        <textarea id="textarea_field" class="nes-textarea" rows="20" v-model="text"></textarea>
+
+        <dir class="nes-container with-title">
+            <p class="title">Preview</p>
+            <div v-html="richTextPreview"></div>
+        </dir>
+
+        <button type="button" class="nes-btn is-primary" @click="storeClipboard">Copy to clipboard</button>
+    </main>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const sampleText = `# Last day
+Find issue https://volsor.slack.com/archives/CATMEETBAD/p140111849
+Resolved https://vlsr.atlassian.net/browse/COVID-19 https://gitlab.com/anticovid/core/-/merge_requests/1
+# Today
+Review https://vlsr.atlassian.net/browse/COVID-20`
+        const linksIcons = {
+            "vlsr.atlassian.net": "jira",
+            "gitlab.com": "pr-open",
+            "volsor.slack.com": "slack",
+        }
+        const linksSubs = {
+            "vlsr.atlassian.net": ["?#-1"],
+            "gitlab.com": ["?#-4", "!", "?#-1"],
+            "volsor.slack.com": ["?#-1"],
+        }
+        function formatLink(url) {
+            let parsedURL = new URL(url)
+            let hostname = parsedURL.hostname
+            let path = parsedURL.pathname
+            let subs = []
+            for (const linkSub of linksSubs[hostname]) {
+                console.log(linkSub.substring(0, 2))
+                if (linkSub.substring(0, 2) == "?#") {
+                    let index = parseInt(linkSub.substring(2))
+                    let pathParts = path.split("/")
+                    if (index < 0) {
+                        index = pathParts.length + index
+                    }
+                    subs.push(pathParts[index])
+                } else {
+                    subs.push(linkSub)
+                }
+            }
+            let icon = ":" + linksIcons[hostname] + ":"
+            let linkText = subs.join("")
+            let link = `<a href="${url}">${linkText}</a>`
+            return icon + " " + link
+        }
+        let app = new Vue({
+            el: "#app",
+            data: {
+                text: (() => sampleText)(),
+                richTextPreview: "",
+            },
+            methods: {
+                getRichText: function() {
+                    let richText = ""
+                    let paragraph = []
+                    let listContext = false
+                    for (const line of this.text.split("\n")) {
+                        let newLine = []
+                        if (line.substr(0, 2) == "# ") {
+                            if (listContext) {
+                                paragraph.push("</ul>")
+                                listContext = false
+                            }
+                            paragraph.push("<h3><b>" + line.substr(2) + "</b></h3>")
+                        } else {
+                            if (!listContext) {
+                                paragraph.push("<ul>")
+                                listContext = true
+                            }
+                            for (const word of line.split(" ")) {
+                                if (word.substr(0, 5).includes("http")) {
+                                    newLine.push(formatLink(word))
+                                } else {
+                                    newLine.push(word)
+                                }
+                            }
+                            paragraph.push("<li>" + newLine.join(" ") + "</li>")
+                        }
+                    }
+                    richText = paragraph.join("\n")
+                    return richText
+                },
+                getRichTextPreview: function() {
+                    const UlOpen = `<div class="lists"><ul class="nes-list is-disc">`
+                    const UlClose = `</ul></div>`
+                    let richText = this.getRichText()
+                    richText = richText.replaceAll("<ul>", UlOpen)
+                    richText = richText.replaceAll("</ul>", UlClose)
+                    return richText
+                },
+                storeClipboard: function() {
+                    const text = this.text
+                    const richText = this.getRichText()
+                    function listener(e) {
+                        e.clipboardData.setData("text/plain", richText);
+                        e.clipboardData.setData("text/html", richText);
+                        e.preventDefault();
+                    }
+                    document.addEventListener("copy", listener);
+                    document.execCommand("copy");
+                    document.removeEventListener("copy", listener);
+                }
+            },
+            watch: {
+                text: function (value) {
+                    this.richTextPreview = this.getRichTextPreview()
+                }
+            }
+        })
+        app.richTextPreview = app.getRichTextPreview()
+    </script>    
+</body>
+</html>
