@@ -19,6 +19,27 @@
 <body style="margin: 1rem;">
     <main id="app" style="width: 980px;" class="nes-container with-title">
         <p class="title">Clipston</p>
+        <p class="subtitle">
+            <p>Title starts from <code># </code>, other is list items. Links supported: vlsr.atlassian.net gitlab.com volsor.slack.com</p>
+            <p>
+                Helpers:
+                <ul>
+                    <li><a target="_blank" href="https://vlsr.atlassian.net/sr/jira.issueviews:searchrequest-excel-current-fields/temp/SearchRequest.html?jqlQuery=updated%20%3E=%20-3d%20AND%20assignee%20in%20(currentUser())%20ORDER%20BY%20updated%20DESC">
+                        Jira Done
+                    </a></li>
+                    <li><a target="_blank" href="https://gitlab.com/groups/volsor/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged&author_username=n.kiselev1">
+                        Git open
+                    </a></li>
+                    <li><a target="_blank" href="https://gitlab.com/groups/volsor/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged&author_username=n.kiselev1">
+                        Git merged
+                    </a></li>
+                    <li><a target="_blank" href="https://vlsr.atlassian.net/sr/jira.issueviews:searchrequest-excel-current-fields/temp/SearchRequest.html?jqlQuery=assignee+IN+%28currentUser%28%29%29+AND+status+IN+%28%223%22%2C+%2211793%22%2C+%2210002%22%2C+%2210201%22%29+ORDER+BY+updated+DESC&tempMax=1000">
+                        Jira Todo
+                    </a></li>
+                </ul>
+            </p>
+        </p>
+
         <label for="textarea_field">Your message</label>
         <textarea id="textarea_field" class="nes-textarea" rows="20" v-model="text"></textarea>
 
