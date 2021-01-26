@@ -6,58 +6,86 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nes.css/2.1.1/css/nes.min.css">
     <link rel="shortcut icon" href="../timert/favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
     <title>Clipston</title>
     <style>
-    textarea {
-        font-family: 'VT323';
+    textarea, .text {
+        font-family: 'JetBrains Mono';
+    }
+    .text h3 {
+        margin-top: 1rem;
     }
     * {cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),auto;}
     .nes-btn {cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0,pointer}
+    code {
+        font: inherit;
+        opacity: .85;
+        text-decoration: underline;
+    }
     </style>
 </head>
 <body style="margin: 1rem;">
-    <main id="app" style="width: 980px;" class="nes-container with-title">
-        <p class="title">Clipston</p>
-        <p class="subtitle">
-            <p>Title starts from <code># </code>, other is list items. Links supported: vlsr.atlassian.net gitlab.com volsor.slack.com</p>
-            <p>
-                Helpers:
-                <ul>
-                    <li><a target="_blank" href="https://vlsr.atlassian.net/sr/jira.issueviews:searchrequest-excel-current-fields/temp/SearchRequest.html?jqlQuery=updated%20%3E=%20-3d%20AND%20assignee%20in%20(currentUser())%20ORDER%20BY%20updated%20DESC">
-                        Jira Done
-                    </a></li>
-                    <li><a target="_blank" href="https://gitlab.com/groups/volsor/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged&author_username=n.kiselev1">
-                        Git open
-                    </a></li>
-                    <li><a target="_blank" href="https://gitlab.com/groups/volsor/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged&author_username=n.kiselev1">
-                        Git merged
-                    </a></li>
-                    <li><a target="_blank" href="https://vlsr.atlassian.net/sr/jira.issueviews:searchrequest-excel-current-fields/temp/SearchRequest.html?jqlQuery=assignee+IN+%28currentUser%28%29%29+AND+status+IN+%28%223%22%2C+%2211793%22%2C+%2210002%22%2C+%2210201%22%29+ORDER+BY+updated+DESC&tempMax=1000">
-                        Jira Todo
-                    </a></li>
-                </ul>
+    <main id="app" style="width: 980px;">
+        <div class="nes-container with-title">
+            <p class="title">Clipston</p>
+            <p class="subtitle">
+                <p>
+                    Helpers:
+                    <ul>
+                        <li><a target="_blank" href="https://vlsr.atlassian.net/sr/jira.issueviews:searchrequest-excel-current-fields/temp/SearchRequest.html?jqlQuery=updated%20%3E=%20-3d%20AND%20assignee%20in%20(currentUser())%20ORDER%20BY%20updated%20DESC">
+                            Jira Done
+                        </a></li>
+                        <li><a target="_blank" href="https://gitlab.com/groups/volsor/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged">
+                            Git open
+                        </a></li>
+                        <li><a target="_blank" href="https://gitlab.com/groups/volsor/-/merge_requests?scope=all&utf8=%E2%9C%93&state=merged">
+                            Git merged
+                        </a></li>
+                        <li><a target="_blank" href="https://vlsr.atlassian.net/sr/jira.issueviews:searchrequest-excel-current-fields/temp/SearchRequest.html?jqlQuery=assignee+IN+%28currentUser%28%29%29+AND+status+IN+%28%223%22%2C+%2211793%22%2C+%2210002%22%2C+%2210201%22%29+ORDER+BY+updated+DESC&tempMax=1000">
+                            Jira Todo
+                        </a></li>
+                    </ul>
+                </p>
+                <div class="nes-balloon from-left nes-pointer">
+                    <p>
+                        Title starts from <code>#&nbsp;</code>, other is {{ listMode === "bullets" ? "list items" : "just a text"}}.
+                    </p>
+                    <p>
+                        Italic text covered in <code>*</code> like <code>*this*</code>.
+                    </p>
+                    <p>
+                        Bold text covered in <code>**</code> like <code>**this**</code>
+                    </p>
+                </div>
             </p>
-        </p>
-
-        <label for="textarea_field">Your message</label>
-        <textarea id="textarea_field" class="nes-textarea" rows="20" v-model="text"></textarea>
-
-        <dir class="nes-container with-title">
-            <p class="title">Preview</p>
-            <div v-html="richTextPreview"></div>
-        </dir>
-
-        <button type="button" class="nes-btn is-primary" @click="storeClipboard">Copy to clipboard</button>
+        </div>
+        <br>
+        <div class="nes-container with-title">
+            <label for="textarea_field">Your message</label>
+            <textarea id="textarea_field" class="nes-textarea" rows="20" v-model="text"></textarea>
+            <dir class="nes-container with-title">
+                <p class="title">Preview</p>
+                <div class="text" v-html="richTextPreview"></div>
+            </dir>
+            <button type="button" class="nes-btn is-primary" @click="storeClipboard">Copy to clipboard</button>
+            <label>
+                <input type="radio" class="nes-radio" value="bullets" v-model="listMode" checked/>
+                <span>Bullets</span>
+            </label>
+            <label>
+                <input type="radio" class="nes-radio" value="plain" v-model="listMode"/>
+                <span>Plain text</span>
+            </label>
+        </div>
     </main>
 
     <script src="https://unpkg.com/vue"></script>
     <script>
         const sampleText = `# Last day
-Find issue https://volsor.slack.com/archives/CATMEETBAD/p140111849
-Resolved https://vlsr.atlassian.net/browse/COVID-19 https://gitlab.com/anticovid/core/-/merge_requests/1
+Find **bold issue** https://volsor.slack.com/archives/CATMEETBAD/p140111849
+Resolved *(was very important)* https://vlsr.atlassian.net/browse/COVID-19 https://gitlab.com/anticovid/core/-/merge_requests/1
 # Today
-Review https://vlsr.atlassian.net/browse/COVID-20`
+Review generator \`yield new Virus()\` https://vlsr.atlassian.net/browse/COVID-20`
         const linksIcons = {
             "vlsr.atlassian.net": "jira",
             "gitlab.com": "pr-open",
@@ -68,61 +96,80 @@ Review https://vlsr.atlassian.net/browse/COVID-20`
             "gitlab.com": ["?#-4", "!", "?#-1"],
             "volsor.slack.com": ["?#-1"],
         }
+        const richTextRE = new RegExp('([\*`]{1,2})(.{1,}?)([\*`]{1,2})', 'gmi')  // https://regex101.com/r/6QZgqz/2
         function formatLink(url) {
+            let link = ""
             let parsedURL = new URL(url)
             let hostname = parsedURL.hostname
             let path = parsedURL.pathname
             let subs = []
-            for (const linkSub of linksSubs[hostname]) {
-                console.log(linkSub.substring(0, 2))
-                if (linkSub.substring(0, 2) == "?#") {
-                    let index = parseInt(linkSub.substring(2))
-                    let pathParts = path.split("/")
-                    if (index < 0) {
-                        index = pathParts.length + index
+            if (typeof(linksSubs[hostname]) !== "undefined" && linksSubs[hostname] !== null) {
+                for (const linkSub of linksSubs[hostname]) {
+                    if (linkSub.substring(0, 2) == "?#") {
+                        let index = parseInt(linkSub.substring(2))
+                        let pathParts = path.split("/")
+                        if (index < 0) {
+                            index = pathParts.length + index
+                        }
+                        subs.push(pathParts[index])
+                    } else {
+                        subs.push(linkSub)
                     }
-                    subs.push(pathParts[index])
-                } else {
-                    subs.push(linkSub)
                 }
+                let icon = ":" + linksIcons[hostname] + ":"
+                let linkText = subs.join("")
+                link = `${icon} <a href="${url}">${linkText}</a>`
+            } else {
+                link = `<a href="${url}">${parsedURL.hostname}${parsedURL.pathname}</a>`
             }
-            let icon = ":" + linksIcons[hostname] + ":"
-            let linkText = subs.join("")
-            let link = `<a href="${url}">${linkText}</a>`
-            return icon + " " + link
+            return link
         }
         let app = new Vue({
             el: "#app",
             data: {
                 text: (() => sampleText)(),
                 richTextPreview: "",
+                listMode: "bullets",
             },
             methods: {
                 getRichText: function() {
                     let richText = ""
                     let paragraph = []
                     let listContext = false
-                    for (const line of this.text.split("\n")) {
+                    for (let line of this.text.split("\n")) {
                         let newLine = []
                         if (line.substr(0, 2) == "# ") {
-                            if (listContext) {
-                                paragraph.push("</ul>")
-                                listContext = false
+                            if (this.listMode === "bullets") {
+                                if (listContext) {
+                                    paragraph.push("</ul>")
+                                    listContext = false
+                                }
                             }
                             paragraph.push("<h3><b>" + line.substr(2) + "</b></h3>")
                         } else {
-                            if (!listContext) {
-                                paragraph.push("<ul>")
-                                listContext = true
-                            }
-                            for (const word of line.split(" ")) {
-                                if (word.substr(0, 5).includes("http")) {
-                                    newLine.push(formatLink(word))
-                                } else {
-                                    newLine.push(word)
+                            if (this.listMode === "bullets") {
+                                if (!listContext) {
+                                    paragraph.push("<ul>")
+                                    listContext = true
                                 }
                             }
-                            paragraph.push("<li>" + newLine.join(" ") + "</li>")
+                            line = line.replaceAll(richTextRE, function(match, g1, g2, g3) {
+                                let openTag = {"*": "i", "**": "b", "`": "code"}[g1]
+                                let closeTag = {"*": "i", "**": "b", "`": "code"}[g3]
+                                match = `<${openTag}>${g2}</${closeTag}>`
+                                return match
+                            })
+                            for (let word of line.split(" ")) {
+                                if (word.substr(0, 5).includes("http")) {
+                                    word = formatLink(word)
+                                }
+                                newLine.push(word)
+                            }
+                            if (this.listMode === "bullets") {
+                                paragraph.push("<li>" + newLine.join(" ") + "</li>")
+                            } else {
+                                paragraph.push(newLine.join(" ") + "</br>")
+                            }
                         }
                     }
                     richText = paragraph.join("\n")
@@ -152,7 +199,10 @@ Review https://vlsr.atlassian.net/browse/COVID-20`
             watch: {
                 text: function (value) {
                     this.richTextPreview = this.getRichTextPreview()
-                }
+                },
+                listMode: function () {
+                    this.richTextPreview = this.getRichTextPreview()
+                },
             }
         })
         app.richTextPreview = app.getRichTextPreview()
