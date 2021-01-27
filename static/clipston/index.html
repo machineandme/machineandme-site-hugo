@@ -25,7 +25,7 @@
     </style>
 </head>
 <body style="margin: 1rem;">
-    <main id="app" style="width: 980px;">
+    <main id="app" style="width: 50vw; margin-left: 25vw;">
         <div class="nes-container with-title">
             <p class="title">Clipston</p>
             <p class="subtitle">
@@ -51,10 +51,16 @@
                         Title starts from <code>#&nbsp;</code>, other is {{ listMode === "bullets" ? "list items" : "just a text"}}.
                     </p>
                     <p>
-                        Italic text covered in <code>*</code> like <code>*this*</code>.
+                        Links will be transformed to icon and shortcode like:<br>
+                        https://vlsr.atlassian.net/browse/COVID-19 -> :jira: COVID-19<br>
+                        Just Jira short code will be also transformed:<br>
+                        COVID-19 -> :jira: COVID-19<br>
+                        Supported vlsr.atlassian.net, gitlab.com,volsor.slack.com<br>
+                        Other links display text will be shorten (removed protocol and query)
                     </p>
                     <p>
-                        Bold text covered in <code>**</code> like <code>**this**</code>
+                        Italic text covered in <code>*</code> like <code>*this*</code>.<br>
+                        Bold text covered in <code>**</code> like <code>**this**</code>.
                     </p>
                     <p>
                         Mnemonic <code>--</code> equal to long dash (&amp;mdash;);<br>
@@ -62,7 +68,7 @@
                         Mnemonic <code>:D</code> to smile face(:smile:);<br>
                         Mnemonic <code>/!\</code> to warning sign (:warning:);<br>
                         Mnemonic <code>[x]</code> to red cross sign (:x:);<br>
-                        Mnemonic <code>[ok]</code> to green check sign (:white_check_mark:);<br>
+                        Mnemonic <code>[ok]</code> to green check sign (:white_check_mark:)
                     </p>
                 </div>
             </p>
