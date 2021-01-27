@@ -56,6 +56,14 @@
                     <p>
                         Bold text covered in <code>**</code> like <code>**this**</code>
                     </p>
+                    <p>
+                        Mnemonic <code>--</code> equal to long dash (&amp;mdash;);<br>
+                        Mnemonic <code>:)</code> to happy face (:blush:);<br>
+                        Mnemonic <code>:D</code> to smile face(:smile:);<br>
+                        Mnemonic <code>/!\</code> to warning sign (:warning:);<br>
+                        Mnemonic <code>[x]</code> to red cross sign (:x:);<br>
+                        Mnemonic <code>[ok]</code> to green check sign (:white_check_mark:);<br>
+                    </p>
                 </div>
             </p>
         </div>
@@ -96,7 +104,8 @@ Review generator \`yield new Virus()\` https://vlsr.atlassian.net/browse/COVID-2
             "gitlab.com": ["?#-4", "!", "?#-1"],
             "volsor.slack.com": ["?#-1"],
         }
-        const richTextRE = new RegExp('([\*`]{1,2})(.{1,}?)([\*`]{1,2})', 'gmi')  // https://regex101.com/r/6QZgqz/2
+        const richTextRE = new RegExp('([\\*`]{1,2})(.{1,}?)([\\*`]{1,2})', 'gmi')  // https://regex101.com/r/6QZgqz/2
+        const jiraRE = new RegExp('^([A-Z]+?-\\d+)$', 'g')
         function formatLink(url) {
             let link = ""
             let parsedURL = new URL(url)
@@ -160,9 +169,18 @@ Review generator \`yield new Virus()\` https://vlsr.atlassian.net/browse/COVID-2
                                 return match
                             })
                             for (let word of line.split(" ")) {
+                                if (word.match(jiraRE) !== null) {
+                                    word = "https://vlsr.atlassian.net/browse/" + word
+                                }
                                 if (word.substr(0, 5).includes("http")) {
                                     word = formatLink(word)
                                 }
+                                if (word === "--") { word = "&mdash;" }
+                                if (word === ":)") { word = ":blush:" }
+                                if (word === ":D") { word = ":smile:" }
+                                if (word === "/!\\") { word = ":warning:" }
+                                if (word === "[x]") { word = ":x:" }
+                                if (word === "[ok]") { word = ":white_check_mark:" }
                                 newLine.push(word)
                             }
                             if (this.listMode === "bullets") {
